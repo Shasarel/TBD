@@ -35,6 +35,11 @@ namespace TBD
                 .HasConversion(_dbValueConverter.DateTimeOffsetDateIntConverter);
 
             modelBuilder
+                .Entity<EnergyCorrection>()
+                .Property(e => e.Date)
+                .HasConversion(_dbValueConverter.DateTimeOffsetDateIntConverter);
+
+            modelBuilder
                 .Entity<DailyMeteoSummary>()
                 .Property(e => e.Date)
                 .HasConversion(_dbValueConverter.DateTimeOffsetDateIntConverter);
