@@ -110,7 +110,7 @@ CREATE TABLE "__EFMigrationsHistory" (
 
 
 INSERT INTO User(Id, Login, PasswordHash, Name, Role, ApiKey)
-SELECT id, username, name, role, password_hash, api_key FROM user_old;
+SELECT id, username, password_hash, name, role, api_key FROM user_old;
 
 INSERT INTO BlindSchedule(Id, Device, Action, HourType, TimeOffset, UserId, IsActive)
 SELECT id, device-1, action-1, hour_type-1, time_offset, user_id, 1 FROM blinds_schedule;
