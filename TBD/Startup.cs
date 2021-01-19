@@ -24,6 +24,7 @@ namespace TBD
             services.AddDbContext<TBDDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IValueConverterService, ValueConverterService>();
+            services.AddTransient<IAuthorizationService, AuthorizationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,6 +48,9 @@ namespace TBD
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "api",
+                    pattern: "api/{controller}/{action}");
             });
         }
     }
