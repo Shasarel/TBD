@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TBD.Interfaces;
 using TBD.Services;
+using System.Linq;
+using TBD.Core.Validation;
 
 namespace TBD
 {
@@ -25,6 +27,18 @@ namespace TBD
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IValueConverterService, ValueConverterService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
+
+            typeof(IValidator)
+                .Assembly.GetTypes()
+                .Where(t => typeof(IValidator).IsAssignableFrom(t) && !t.IsAbstract).ToList()
+                .ForEach(x => services.AddTransient(x));
+
+            services.AddTransient<IValidationProvider>(provider => new ValidationProvider(type =>
+                (IValidator) provider
+                    .GetService(typeof(IValidator)
+                    .Assembly.GetTypes()
+                    .FirstOrDefault(x => x.IsSubclassOf(typeof(Validator<>).MakeGenericType(type))))));
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

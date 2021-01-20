@@ -1,9 +1,9 @@
-﻿using TBD.Enums;
+﻿using TBD.Models;
 
 namespace TBD.Interfaces
 {
     public interface IAuthorizationService
     {
-        public bool CreateUser(string login, string password, string name, Role role);
+        public void CreateUser(UserViewModel userViewModel);
     }
 }

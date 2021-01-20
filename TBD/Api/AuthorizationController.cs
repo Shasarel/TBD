@@ -1,6 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Microsoft.AspNetCore.Mvc;
-using TBD.DbModels;
+﻿using Microsoft.AspNetCore.Mvc;
+using TBD.Core.Validation;
 using TBD.Interfaces;
 using TBD.Models;
 
@@ -18,10 +17,17 @@ namespace TBD.Api
         [HttpPost]
         public IActionResult Register([FromBody] UserViewModel user)
         {
-            if (!ModelState.IsValid) return BadRequest();
-            if(!_authorizationService.CreateUser(user.Login, user.Password, user.Name, user.Role)) return BadRequest();
-            return Ok();
+            try
+            {
+                _authorizationService.CreateUser(user);
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelErrors(ex);
+                return BadRequest(ModelState);
+            }
 
+            return Ok();
         }
     }
 }

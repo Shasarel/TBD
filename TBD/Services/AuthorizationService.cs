@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using TBD.DbModels;
-using TBD.Enums;
 using TBD.Interfaces;
+using TBD.Models;
 
 
 namespace TBD.Services
@@ -14,24 +12,25 @@ namespace TBD.Services
     public class AuthorizationService : IAuthorizationService
     {
         private readonly TBDDbContext _context;
-        public AuthorizationService(TBDDbContext context)
+        private readonly IValidationProvider _validationProvider;
+        public AuthorizationService(TBDDbContext context, IValidationProvider validationProvider)
         {
             _context = context;
+            _validationProvider = validationProvider;
         }
 
-        public bool CreateUser(string login, string password, string name, Role role)
+        public void CreateUser(UserViewModel user)
         {
-            if (_context.User.Count(x => string.Equals(x.Login, login, StringComparison.CurrentCultureIgnoreCase)) != 0) return false; 
+            _validationProvider.Validate(user);
             _context.Add(new User()
             {
-                Login = login,
-                PasswordHash = HashPassword(password),
-                Name = name,
-                Role = role,
+                Login = user.Login.Trim(),
+                PasswordHash = HashPassword(user.Password),
+                Name = user.Name.Trim(),
+                Role = user.Role,
                 ApiKey = CreateApiKey()
             });
             _context.SaveChanges();
-            return true;
         }
 
         private string CreateApiKey()
