@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using TBD.Interfaces;
 using TBD.Services;
 using System.Linq;
+using TBD.Core.Authorization;
 using TBD.Core.Validation;
+using TBD.Helpers;
 
 namespace TBD
 {
@@ -27,6 +29,7 @@ namespace TBD
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IValueConverterService, ValueConverterService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             typeof(IValidator)
                 .Assembly.GetTypes()
@@ -51,11 +54,12 @@ namespace TBD
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseMiddleware<AuthorizationMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

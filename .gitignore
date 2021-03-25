@@ -54,3 +54,6 @@ _ReSharper*/
 
 #Database files
 *.db
+
+#Configuration files
+appsettings.json
