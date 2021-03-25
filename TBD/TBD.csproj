@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <Folder Include="DbModels\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\lib\" />
 </ItemGroup>
 
 </Project>

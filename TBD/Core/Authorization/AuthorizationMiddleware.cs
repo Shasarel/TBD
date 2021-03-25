@@ -16,7 +16,7 @@ namespace TBD.Core.Authorization
 
         public async Task Invoke(HttpContext context, IAuthorizationService authorizationService)
         {
-            var token = context.Request.Cookies["Authorization"].Split(" ").Last();
+            var token = context.Request.Cookies["Authorization"]?.Split(" ").Last();
             context.Items["User"] = authorizationService.ValidateToken(token);
             await _next(context);
         }

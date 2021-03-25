@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <title>@ViewData["Title"] - TBD</title>
+    <link rel="stylesheet" href="~/libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/icons/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/icons/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/icons/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="~/libs/toastr/toastr.min.css">
+    <link rel="stylesheet" href="~/libs/DataTables/datatables.min.css" />
+    <link rel="stylesheet" href="~/libs/datatimepicker/tempusdominus-bootstrap-4.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+</head>
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        @RenderBody()
+    </div>
+    <script src="~/libs/jquery/jquery-3.3.1.min.js"></script>
+    <script src="~/libs/popper/umd/popper.min.js"></script>
+    <script src="~/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/libs/toastr/toastr.min.js"></script>
+    <script src="~/js/start.js" asp-append-version="true"></script>
+    <script src="~/js/tabs.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

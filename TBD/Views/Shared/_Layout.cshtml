@@ -1,48 +1,51 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TBD</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TBD</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div id="sidebar">
+    <a id="logo" href="/">
+        <b id="logo-icon">
+            <i class="mdi mdi-home"></i>
+        </b>
+        <span id="logo-text">
+            Asylum
+        </span>
+    </a>
+    <nav id="navbar2">
+        <ul id="navbar">
+            <li class="navbar-item"> <a class="navbar-link" href="/home" aria-expanded="false"><div class="navbar-icon"><i class="mdi mdi-view-dashboard"></i></div><span class="navbar-text">Strona Główna</span></a></li>
+            <li class="navbar-item"> <a class="navbar-link" href="/energy" aria-expanded="false"><div class="navbar-icon"><i class="fas fa-bolt"></i></div><span class="navbar-text">Energia</span></a></li>
+            <li class="navbar-item"> <a class="navbar-link" href="/blinds" aria-expanded="false"><div class="navbar-icon"><i class="mdi mdi-blinds"></i></div><span class="navbar-text">Rolety</span></a></li>
+            <li class="navbar-item"> <a class="navbar-link" href="/meteo" aria-expanded="false"><div class="navbar-icon"><i class="mdi mdi-thermometer-lines"></i></div><span class="navbar-text">Stacja meteo</span></a></li>
+        </ul>
+    </nav>
+</div>
+<div id="page-wrapper">
+    <header id="topbar">
+        <div class="toogle-menu"><i class="mdi mdi-menu"></i></div>
+        <a href="/admin" class="admin-panel-button">Panel administracyjny</a>
+        <div id="user-icon" class="user-icon">
+            <div class="user-menu">
+                <a href="users">
+                    <div class="user-menu-item">
+                        <i class="mdi mdi-account-settings-variant"></i>
+                        Ustawienia
+                    </div>
+                </a>
+                <a href="\auth\logout">
+                    <div class="user-menu-item">
+                        <i class="mdi mdi-logout"></i>
+                        Wyloguj
+                    </div>
+                </a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TBD - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+    </header>
+    <div id="page-breadcrumb">
+    </div>
+    <div id="page-container">
+        @RenderBody()
+    </div>
+    <footer class="footer text-center">
+        Ostatnia aktualizacja strony:
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-</body>
-</html>
+</div>
