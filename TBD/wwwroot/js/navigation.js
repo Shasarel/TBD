@@ -42,17 +42,15 @@ function setActiveTab(buttonId) {
     $("#" + buttonId).addClass("navbar-link-active");
 }
 
-$(document).ready(function () {
-    $(window).on({
-        'load': function () {
-            window.history.replaceState({ 'buttonId': $(".navbar-link-active").attr("id"), "url": document.URL }, "", document.URL);
-            documentReady = true;
-        },
-        'popstate': function (e) {
-            var oState = e.originalEvent.state;
-            if (oState) {
-                changePage(oState["url"], oState["buttonId"], true);
-            }
+$(window).on({
+    'load': function () {
+        window.history.replaceState({ 'buttonId': $(".navbar-link-active").attr("id"), "url": document.URL }, "", document.URL);
+        documentReady = true;
+    },
+    'popstate': function (e) {
+        var oState = e.originalEvent.state;
+        if (oState) {
+            changePage(oState["url"], oState["buttonId"], true);
         }
-    });
+    }
 });

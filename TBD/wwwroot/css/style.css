@@ -66,9 +66,10 @@ body {
     background: #141619;
     height: 64px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     z-index: 10;
+    padding: 15px;
 }
 
 #sidebar {
@@ -126,7 +127,7 @@ body {
 }
 
 .navbar-link {
-    color: #A5A8AB;
+    color: #d3d7db;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -136,7 +137,7 @@ body {
 }
 
 .navbar-link-active {
-    background: #27A9E3;
+    background: #27A9E3 !important;
     color: white;
 }
 
@@ -804,4 +805,21 @@ div.loader > div {
     75% {
         transform: scale(1);
     }
+}
+.topbar-button {
+    background: #1F262D;
+    height: 100%;
+    line-height: 34px;
+    vertical-align: middle;
+    text-align: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-style: solid;
+    border-color: grey;
+    border-radius: 2px;
+    border-width: 1px;
+    display: initial;
+    align-items: initial;
+    width: initial;
+    margin-left: 15px;
 }

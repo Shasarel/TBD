@@ -11,7 +11,7 @@ using TBD.Models;
 namespace TBD.Controllers
 {
     [Route("{Action}")]
-    public class UserController : Controller
+    public class UserController : TBDController
     {
         private readonly IAuthorizationService _authorizationService;
         private readonly AppSettings _appSettings;
@@ -61,6 +61,13 @@ namespace TBD.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Response.Cookies.Delete("Authorization");
+            return RedirectToAction("Login", "User");
         }
     }
 }
