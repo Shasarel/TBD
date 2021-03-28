@@ -1,6 +1,17 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Html
+@{
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
+@section Scripts{
+    <script src="~/js/navigation.js"></script>
+}
+@functions {
+    IHtmlContent GetButtonConfig(string controller, string classActive, string classInactive)
+    {
+        return Html.Raw(((ViewContext.RouteData.Values["controller"].ToString() == controller) ? "class=\"" + classActive + " " + classInactive + "\"" : "class=\"" + classInactive + "\"") + " onclick=\"changePage('" + Url.Action("Index", controller) + "', this.id);\"");
+    }
+}
+
 <div id="sidebar">
     <a id="logo" href="/">
         <b id="logo-icon">
@@ -12,10 +23,30 @@
     </a>
     <nav id="navbar2">
         <ul id="navbar">
-            <li class="navbar-item"> <a class="navbar-link" href="/home" aria-expanded="false"><div class="navbar-icon"><i class="mdi mdi-view-dashboard"></i></div><span class="navbar-text">Strona Główna</span></a></li>
-            <li class="navbar-item"> <a class="navbar-link" href="/energy" aria-expanded="false"><div class="navbar-icon"><i class="fas fa-bolt"></i></div><span class="navbar-text">Energia</span></a></li>
-            <li class="navbar-item"> <a class="navbar-link" href="/blinds" aria-expanded="false"><div class="navbar-icon"><i class="mdi mdi-blinds"></i></div><span class="navbar-text">Rolety</span></a></li>
-            <li class="navbar-item"> <a class="navbar-link" href="/meteo" aria-expanded="false"><div class="navbar-icon"><i class="mdi mdi-thermometer-lines"></i></div><span class="navbar-text">Stacja meteo</span></a></li>
+            <li class="navbar-item">
+
+                <div id="homeTabButton" @GetButtonConfig( "Home", "navbar-link-active navbar-link", "navbar-link") aria-expanded="false">
+                    <div class="navbar-icon"><i class="mdi mdi-view-dashboard"></i></div><span class="navbar-text">Strona Główna</span>
+                </div>
+            </li>
+            <li class="navbar-item">
+
+                <div id="energyTabButton" @GetButtonConfig( "Energy", "navbar-link-active navbar-link", "navbar-link") aria-expanded="false">
+                    <div class="navbar-icon"><i class="fas fa-bolt"></i></div><span class="navbar-text">Energia</span>
+                </div>
+            </li>
+            <li class="navbar-item">
+
+                <div id="blindTabButton" @GetButtonConfig( "Blind", "navbar-link-active navbar-link", "navbar-link") aria-expanded="false">
+                    <div class="navbar-icon"><i class="mdi mdi-blinds"></i></div><span class="navbar-text">Rolety</span>
+                </div>
+            </li>
+            <li class="navbar-item">
+
+                <div id="meteoTabButton" @GetButtonConfig( "Meteo", "navbar-link-active navbar-link", "navbar-link") aria-expanded="false">
+                    <div class="navbar-icon"><i class="mdi mdi-thermometer-lines"></i></div><span class="navbar-text">Stacja meteo</span>
+                </div>
+            </li>
         </ul>
     </nav>
 </div>

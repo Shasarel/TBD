@@ -52,6 +52,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    vertical-align: top;
 }
 
 .row {
@@ -67,6 +68,7 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    z-index: 10;
 }
 
 #sidebar {
@@ -74,7 +76,8 @@ body {
     width: 250px;
     background: #1F262D;
     -webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
-    box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08)
+    box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+    z-index: 10;
 }
 
 #logo {
@@ -129,6 +132,7 @@ body {
     align-items: center;
     width: 100%;
     padding-left: 20px;
+    cursor: pointer;
 }
 
 .navbar-link-active {
@@ -744,4 +748,60 @@ body {
     border-style: solid;
     border-width: 1px;
     border-color: darkgrey;
+}
+#loader {
+    background: red;
+    height: 100%;
+    width: 100%;
+}
+
+div.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.loader > div {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 100%;
+    margin: 2vw;
+    background-image: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(0,0,0,0) 100%);
+}
+
+.yellow {
+    animation: bounce 1.5s 0.5s linear infinite;
+    background-color: #feb60a;
+}
+
+.red {
+    animation: bounce 1.5s 0.5s linear infinite;
+    background-color: #ff0062;
+    animation-delay: 0.1s;
+}
+
+.blue {
+    animation: bounce 1.5s 0.5s linear infinite;
+    background-color: #00dbf9;
+    animation-delay: 0.2s;
+}
+
+.violet {
+    animation: bounce 1.5s 0.5s linear infinite;
+    background-color: #da00f7;
+    animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+    0%, 50%, 100% {
+        transform: scale(0.8);
+    }
+
+    25% {
+        transform: scale(0.5);
+    }
+
+    75% {
+        transform: scale(1);
+    }
 }

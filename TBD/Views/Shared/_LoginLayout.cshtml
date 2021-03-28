@@ -25,15 +25,13 @@
             <div class="lds-pos"></div>
         </div>
     </div>
-    <div id="main-wrapper">
-        @RenderBody()
-    </div>
-    <script src="~/libs/jquery/jquery-3.3.1.min.js"></script>
-    <script src="~/libs/popper/umd/popper.min.js"></script>
-    <script src="~/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/libs/toastr/toastr.min.js"></script>
-    <script src="~/js/start.js" asp-append-version="true"></script>
-    <script src="~/js/tabs.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+<div id="main-wrapper">
+    @RenderBody()
+</div>
+<script src="~/libs/jquery/jquery-3.3.1.min.js"></script>
+<script src="~/libs/popper/umd/popper.min.js"></script>
+<script src="~/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/libs/toastr/toastr.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
