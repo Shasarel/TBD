@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using TBD.Interfaces;
 using TBD.Services;
 using System.Linq;
+using TBD.Core;
 using TBD.Core.Authorization;
 using TBD.Core.Validation;
-using TBD.Helpers;
 
 namespace TBD
 {
@@ -29,6 +29,7 @@ namespace TBD
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IValueConverterService, ValueConverterService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
+            services.AddTransient<IMeasurementFetcher, MeasurementFetcher>();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             typeof(IValidator)

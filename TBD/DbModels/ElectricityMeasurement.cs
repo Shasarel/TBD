@@ -14,5 +14,8 @@ namespace TBD.DbModels
         [Required] public int PowerProduction { get; set; }
         [Required] public int PowerImport { get; set; }
         [Required] public int PowerExport { get; set; }
+        [NotMapped] public int PowerConsumption {get; set; }
+        [NotMapped] public int PowerUse { get; set; }
+        [NotMapped] public int PowerStore { get; set; }
     }
 }
