@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using TBD.Interfaces;
-using TBD.Models;
 using Newtonsoft.Json;
 using TBD.DbModels;
 
@@ -45,7 +44,7 @@ namespace TBD.Core
                 || flaraList == null
                 || flaraList == "<tr class='msgfail'><td>Devices not found.</td></tr>"
                 || flaraData == null)
-                return null;
+                return new ElectricityMeasurement();
 
             var matches = Regex.Matches(flaraData!, "((?<=Active power</div><div class='pvalue vok'>)[0-9.]*)|" +
                                                     "((?<=Total energy</div><div class='pvalue vok'>)[0-9.]*)").ToArray();
@@ -57,22 +56,22 @@ namespace TBD.Core
             {
                 double power = eMeterData![x];
                 if (power < 0)
-                    powerExport += power;
+                    powerExport -= power;
                 else
                 {
                     powerImport += power;
                 }
             }
 
-            var electricityMeasurement = new ElectricityMeasurement()
+            var electricityMeasurement = new ElectricityMeasurement
             {
-                DateTime = DateTimeOffset.UtcNow,
                 EnergyProduction = double.Parse(matches[1].Value, CultureInfo.InvariantCulture),
                 EnergyImport = eMeterData!["37"],
                 EnergyExport = eMeterData!["38"],
                 PowerProduction = int.Parse(matches[0].Value, CultureInfo.InvariantCulture),
                 PowerImport = (int)Math.Round(powerImport),
-                PowerExport = (int)Math.Round(powerExport)
+                PowerExport = (int)Math.Round(powerExport),
+                Correct = true
             };
 
             electricityMeasurement.PowerUse =

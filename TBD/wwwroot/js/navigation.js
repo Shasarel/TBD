@@ -1,7 +1,7 @@
 ﻿var lockButtons = false;
 var currentUrl = null;
 var documentReady = false;
-function changePage(url, buttonId, isBackButton = false) {
+function changePage(url, buttonId=null, isBackButton = false) {
     if ((!lockButtons || isBackButton) && currentUrl !== url && documentReady) {
         lockButtons = true;
         currentUrl = url;
@@ -12,7 +12,7 @@ function changePage(url, buttonId, isBackButton = false) {
                 if (loader)
                     $("#page-container")
                         .html(
-                            '<div class="loader"><div class="yellow" ></div ><div class="red"></div><div class="blue"></div><div class="violet"></div></div>')
+                            '<div class="loader"><div class="loader-yellow" ></div ><div class="loader-red"></div><div class="loader-blue"></div><div class="loader-violet"></div></div>')
                         .fadeIn(100);
             });
         $.ajax({
@@ -38,8 +38,10 @@ function changePage(url, buttonId, isBackButton = false) {
 }
 
 function setActiveTab(buttonId) {
-    $(".navbar-link-active").removeClass("navbar-link-active");
-    $("#" + buttonId).addClass("navbar-link-active");
+    if (buttonId != null) {
+        $(".navbar-link-active").removeClass("navbar-link-active");
+        $("#" + buttonId).addClass("navbar-link-active");
+    }
 }
 
 $(window).on({

@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +31,7 @@ namespace TBD
             services.AddSingleton<IValueConverterService, ValueConverterService>();
             services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddTransient<IMeasurementFetcher, MeasurementFetcher>();
+            services.AddTransient<IEnergyService, EnergyService>();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             typeof(IValidator)
@@ -61,6 +63,8 @@ namespace TBD
             app.UseRouting();
 
             app.UseMiddleware<AuthorizationMiddleware>();
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
 
             app.UseEndpoints(endpoints =>
             {

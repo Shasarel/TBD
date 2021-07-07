@@ -7,9 +7,9 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using TBD.Core;
 using TBD.DbModels;
 using TBD.Enums;
-using TBD.Helpers;
 using TBD.Interfaces;
 using TBD.Models;
 
@@ -68,9 +68,7 @@ namespace TBD.Services
                     ClockSkew = TimeSpan.Zero
                 }, out var validatedToken);
 
-                var identity = principal.Identity as ClaimsIdentity;
-
-                if (identity == null)
+                if (!(principal.Identity is ClaimsIdentity identity))
                     return null;
                 if (!identity.IsAuthenticated)
                     return null;

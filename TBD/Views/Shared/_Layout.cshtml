@@ -3,11 +3,25 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 @section Scripts{
+    @await RenderSectionAsync("Scripts", required: false)
     <script src="~/js/navigation.js"></script>
 }
 @functions {
-    IHtmlContent GetButtonConfig(string controller, string classActive, string classInactive)
+    IHtmlContent GetButtonConfig(string controller, string type)
     {
+        var classActive = "";
+        var classInactive = "";
+        switch (type)
+        {
+            case "sidebar":
+                classActive = "navbar-link-active navbar-link";
+                classInactive = "navbar-link";
+                break;
+            case "topbar":
+                classActive = "navbar-link topbar-button navbar-link-active";
+                classInactive = "navbar-link topbar-button";
+                break;
+        }
         return Html.Raw(((ViewContext.RouteData.Values["controller"].ToString() == controller) ? "class=\"" + classActive + " " + classInactive + "\"" : "class=\"" + classInactive + "\"") + " onclick=\"changePage('" + Url.Action("Index", controller) + "', this.id);\"");
     }
 }
@@ -25,25 +39,25 @@
         <ul id="navbar">
             <li class="navbar-item">
 
-                <div id="homeTabButton" @GetButtonConfig( "Home", "navbar-link-active navbar-link", "navbar-link") aria-expanded="false">
+                <div id="homeTabButton" @GetButtonConfig("Home", "sidebar") aria-expanded="false">
                     <div class="navbar-icon"><i class="mdi mdi-view-dashboard"></i></div><span class="navbar-text">Strona Główna</span>
                 </div>
             </li>
             <li class="navbar-item">
 
-                <div id="energyTabButton" @GetButtonConfig( "Energy", "navbar-link-active navbar-link", "navbar-link") aria-expanded="false">
+                <div id="energyTabButton" @GetButtonConfig("Energy", "sidebar") aria-expanded="false">
                     <div class="navbar-icon"><i class="fas fa-bolt"></i></div><span class="navbar-text">Energia</span>
                 </div>
             </li>
             <li class="navbar-item">
 
-                <div id="blindTabButton" @GetButtonConfig( "Blind", "navbar-link-active navbar-link", "navbar-link") aria-expanded="false">
+                <div id="blindTabButton" @GetButtonConfig("Blind", "sidebar") aria-expanded="false">
                     <div class="navbar-icon"><i class="mdi mdi-blinds"></i></div><span class="navbar-text">Rolety</span>
                 </div>
             </li>
             <li class="navbar-item">
 
-                <div id="meteoTabButton" @GetButtonConfig( "Meteo", "navbar-link-active navbar-link", "navbar-link") aria-expanded="false">
+                <div id="meteoTabButton" @GetButtonConfig("Meteo", "sidebar") aria-expanded="false">
                     <div class="navbar-icon"><i class="mdi mdi-thermometer-lines"></i></div><span class="navbar-text">Stacja meteo</span>
                 </div>
             </li>
@@ -52,8 +66,8 @@
 </div>
 <div id="page-wrapper">
     <header id="topbar">
-        <div id="adminTabButton" @GetButtonConfig("Admin", "navbar-link topbar-button navbar-link-active", "navbar-link topbar-button")>Panel administracyjny</div>
-        <div id="settingsTabButton" @GetButtonConfig("Setting", "navbar-link topbar-button navbar-link-active", "navbar-link topbar-button")>Ustawienia</div>
+        <div id="adminTabButton" @GetButtonConfig("Admin", "topbar")>Panel administracyjny</div>
+        <div id="settingsTabButton" @GetButtonConfig("Setting", "topbar")>Ustawienia</div>
         <a href="@Url.Action("Logout","User")"><div id="logoutTabButton" class="navbar-link topbar-button" style="background: #991900; padding-top: 5px; padding-bottom: 5px;" )>Wyloguj</div></a>
     </header>
     <div id="page-breadcrumb">
