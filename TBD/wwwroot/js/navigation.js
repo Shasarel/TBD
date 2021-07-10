@@ -7,6 +7,9 @@ function changePage(url, buttonId=null, isBackButton = false) {
         currentUrl = url;
         setActiveTab(buttonId);
         var loader = true;
+        if (typeof(interval) != "undefined") {
+            clearInterval(interval);
+        }
         $("#page-container").fadeOut(100,
             function() {
                 if (loader)

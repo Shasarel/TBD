@@ -1,5 +1,5 @@
 ﻿
-setInterval(refreshPowerData, 1000);
+var interval = setInterval(refreshPowerData, 1000);
 
     function refreshPowerData() {
     $.ajax({

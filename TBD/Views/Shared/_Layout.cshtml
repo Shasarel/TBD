@@ -70,12 +70,7 @@
         <div id="settingsTabButton" @GetButtonConfig("Setting", "topbar")>Ustawienia</div>
         <a href="@Url.Action("Logout","User")"><div id="logoutTabButton" class="navbar-link topbar-button" style="background: #991900; padding-top: 5px; padding-bottom: 5px;" )>Wyloguj</div></a>
     </header>
-    <div id="page-breadcrumb">
-    </div>
     <div id="page-container">
         @RenderBody()
     </div>
-    <footer class="footer text-center">
-        Ostatnia aktualizacja strony:
-    </footer>
 </div>

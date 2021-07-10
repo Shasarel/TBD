@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TBD.Core.Authorization;
 using TBD.Interfaces;
@@ -16,7 +17,7 @@ namespace TBD.Controllers
         [HttpGet]
         public async Task<JsonResult> GetPowerNow()
         {
-            return Json(await _energyService.GetPowerNowViewModel());
+            return Json(await _energyService.GetPowerIndexViewModel());
         }
 
 
@@ -24,7 +25,7 @@ namespace TBD.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _energyService.GetEnergyNowViewModel());
+            return View(await _energyService.GetEnergyIndexViewModel());
         }
     }
 }

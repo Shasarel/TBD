@@ -17,6 +17,8 @@ namespace TBD.Core
     {
         private readonly AppSettings _appSettings;
         private readonly IValueConverterService _dbValueConverter;
+        private const double EnergyProductionOffset = 1609279.270;
+
         public MeasurementFetcher(IOptions<AppSettings> appSettings, IValueConverterService dbValueConverter)
         {
             _appSettings = appSettings.Value;
@@ -33,18 +35,31 @@ namespace TBD.Core
 
         public async Task<ElectricityMeasurement> GetElectricityMeasurement()
         {
-            var flaraListTask = GetResponse(_appSettings.FlaraListAddress);
-            var flaraDataTask = GetResponse(_appSettings.FlaraDataAddress);
+            dynamic eMeterData;
+            string flaraList;
+            string flaraData;
 
-            dynamic eMeterData = await GetJsonResponse(_appSettings.EmeterAddress);
-            var flaraList = await flaraListTask;
-            var flaraData = await flaraDataTask;
+            var remainingTrials = 3;
 
-            if (eMeterData == null
-                || flaraList == null
-                || flaraList == "<tr class='msgfail'><td>Devices not found.</td></tr>"
-                || flaraData == null)
-                return new ElectricityMeasurement();
+            do
+            {
+                var flaraListTask = GetResponse(_appSettings.FlaraListAddress);
+                var eMeterDataTask = GetJsonResponse(_appSettings.EmeterAddress);
+                var flaraDataTask = GetResponse(_appSettings.FlaraDataAddress);
+
+                eMeterData = await eMeterDataTask;
+                flaraList = await flaraListTask;
+                flaraData = await flaraDataTask;
+
+                remainingTrials--;
+
+                if(remainingTrials == 0)
+                    return new ElectricityMeasurement();
+
+            } while (eMeterData == null || flaraList == null
+                                        || flaraList == "<tr class='msgfail'><td>Devices not found.</td></tr>"
+                                        || flaraData == null);
+
 
             var matches = Regex.Matches(flaraData!, "((?<=Active power</div><div class='pvalue vok'>)[0-9.]*)|" +
                                                     "((?<=Total energy</div><div class='pvalue vok'>)[0-9.]*)").ToArray();
@@ -65,7 +80,7 @@ namespace TBD.Core
 
             var electricityMeasurement = new ElectricityMeasurement
             {
-                EnergyProduction = double.Parse(matches[1].Value, CultureInfo.InvariantCulture),
+                EnergyProduction = double.Parse(matches[1].Value, CultureInfo.InvariantCulture) - EnergyProductionOffset,
                 EnergyImport = eMeterData!["37"],
                 EnergyExport = eMeterData!["38"],
                 PowerProduction = int.Parse(matches[0].Value, CultureInfo.InvariantCulture),
@@ -81,7 +96,7 @@ namespace TBD.Core
                 Math.Max(0, electricityMeasurement.PowerImport + electricityMeasurement.PowerUse);
 
             electricityMeasurement.PowerStore =
-                (int) Math.Round((electricityMeasurement.PowerExport * 0.8) - electricityMeasurement.PowerImport);
+                (int) Math.Round((electricityMeasurement.PowerExport * _appSettings.EnergyReturnFactor) - electricityMeasurement.PowerImport);
 
             return electricityMeasurement;
         }
