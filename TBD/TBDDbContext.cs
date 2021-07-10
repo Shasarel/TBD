@@ -100,11 +100,6 @@ namespace TBD
 
             modelBuilder
                 .Entity<MeteoMeasurement>()
-                .Property(e => e.Humidity)
-                .HasConversion(_dbValueConverter.IntDouble1000Converter);
-
-            modelBuilder
-                .Entity<MeteoMeasurement>()
                 .Property(e => e.Pressure)
                 .HasConversion(_dbValueConverter.IntDouble100Converter);
 

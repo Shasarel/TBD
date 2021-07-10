@@ -1,18 +1,21 @@
 ﻿var lockButtons = false;
 var currentUrl = null;
 var documentReady = false;
-function changePage(url, buttonId, isBackButton = false) {
+function changePage(url, buttonId=null, isBackButton = false) {
     if ((!lockButtons || isBackButton) && currentUrl !== url && documentReady) {
         lockButtons = true;
         currentUrl = url;
         setActiveTab(buttonId);
         var loader = true;
+        if (typeof(interval) != "undefined") {
+            clearInterval(interval);
+        }
         $("#page-container").fadeOut(100,
             function() {
                 if (loader)
                     $("#page-container")
                         .html(
-                            '<div class="loader"><div class="yellow" ></div ><div class="red"></div><div class="blue"></div><div class="violet"></div></div>')
+                            '<div class="loader"><div class="loader-yellow" ></div ><div class="loader-red"></div><div class="loader-blue"></div><div class="loader-violet"></div></div>')
                         .fadeIn(100);
             });
         $.ajax({
@@ -38,8 +41,10 @@ function changePage(url, buttonId, isBackButton = false) {
 }
 
 function setActiveTab(buttonId) {
-    $(".navbar-link-active").removeClass("navbar-link-active");
-    $("#" + buttonId).addClass("navbar-link-active");
+    if (buttonId != null) {
+        $(".navbar-link-active").removeClass("navbar-link-active");
+        $("#" + buttonId).addClass("navbar-link-active");
+    }
 }
 
 $(window).on({
@@ -54,3 +59,27 @@ $(window).on({
         }
     }
 });
+
+var isScreenSmall = false;
+
+$(".toogle-menu-button").click(function () {
+    $(".topbar-button").not("#logoutTabButton").toggle(200);
+});
+$("#page-container, .topbar-button, #sidebar").click(function () {
+    if (isScreenSmall) $(".topbar-button").not("#logoutTabButton").hide(200);
+});
+
+function manageTopbarSizeChanges(x) {
+    if (x.matches) { 
+        $(".topbar-button").not("#logoutTabButton").hide();
+        isScreenSmall = true;
+    } else {
+        $(".topbar-button").not("#logoutTabButton").show();
+        isScreenSmall = false;
+    }
+}
+
+var x = window.matchMedia("(max-width: 670px)");
+manageTopbarSizeChanges(x);
+x.addListener(manageTopbarSizeChanges);
+

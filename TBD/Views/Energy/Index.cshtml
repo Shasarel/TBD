@@ -1,8 +1,189 @@
-﻿@{
+﻿@model TBD.Models.EnergyIndexViewModel
+@{
     ViewData["Title"] = "Energia";
 }
 <div id="title" hidden>@ViewData["Title"]</div>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Energy</p>
+<div class="text-center section">
+    <fieldset class="card-peity-fieldset" style="margin-top: -20px;">
+        <legend class="card-peity-legend">Moc chwilowa</legend>
+        <div class="card-peity-row">
+            <div class="card card-peity">
+                <div class="card-peity-title">Moc produkowana</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-production" class="card-top-number">@Model.ElectricityMeasurement.PowerProduction</div>
+                        <div class="card-top-unit">[W]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter green">
+                            <span id="power-production-percentage" style="width: @Model.PowerProductionPercentage%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Moc pobierana</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-import" class="card-top-number">@Model.ElectricityMeasurement.PowerImport</div>
+                        <div class="card-top-unit">[W]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter orange">
+                            <span id="power-import-percentage" style="width: @Model.PowerImportPercentage%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Moc oddawana</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-export" class="card-top-number">@Model.ElectricityMeasurement.PowerExport</div>
+                        <div class="card-top-unit">[W]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter orange">
+                            <span id="power-export-percentage" style="width: @Model.PowerExportPercentage%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Moc zużywana</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-consumption" class="card-top-number">@Model.ElectricityMeasurement.PowerConsumption</div>
+                        <div class="card-top-unit">[W]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter red">
+                            <span id="power-consumption-percentage" style="width: @Model.PowerConsumptionPercentage%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Moc wykorzystywana</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-use" class="card-top-number">@Model.ElectricityMeasurement.PowerUse</div>
+                        <div class="card-top-unit">[W]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter orange">
+                            <span id="power-use-percentage" style="width: @Model.PowerUsePercentage%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Moc magazynowana</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-store" class="card-top-number">@Model.ElectricityMeasurement.PowerStore</div>
+                        <div class="card-top-unit">[W]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter orange">
+                            <span id="power-store-percentage" style="width: @Model.PowerStorePercentage%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
 </div>
+
+<div class="text-center section">
+    <fieldset class="card-peity-fieldset" style="margin-top: -20px;">
+        <legend class="card-peity-legend">Energia</legend>
+        <div class="card-peity-row">
+            <div class="card card-peity">
+                <div class="card-peity-title">Dzienna produkcja</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-production" class="card-top-number">@Model.EnergySummaryToday.Production.ToString("F")</div>
+                        <div class="card-top-unit">[kWh]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter green">
+                            <span id="power-production-percentage" style="width: 100%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Dzienne zużycie</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-import" class="card-top-number">@Model.EnergySummaryToday.Consumption.ToString("F")</div>
+                        <div class="card-top-unit">[kWh]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter red">
+                            <span id="power-import-percentage" style="width: 100%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Dzienny bilans</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-export" class="card-top-number">@Model.EnergySummaryToday.Store.ToString("F")</div>
+                        <div class="card-top-unit">[kWh]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter orange">
+                            <span id="power-export-percentage" style="width: 100%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Całkowita produkcja</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-consumption" class="card-top-number">@Model.EnergySummaryAll.Production.ToString("F")</div>
+                        <div class="card-top-unit">[kWh]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter green">
+                            <span id="power-consumption-percentage" style="width: 100%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Całkowite zużycie</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-use" class="card-top-number">@Model.EnergySummaryAll.Consumption.ToString("F")</div>
+                        <div class="card-top-unit">[kWh]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter red">
+                            <span id="power-use-percentage" style="width: 100%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-peity">
+                <div class="card-peity-title">Całkowity bilans</div>
+                <div class="card-peity-body">
+                    <div class="card-top">
+                        <div id="power-store" class="card-top-number">@Model.EnergySummaryAll.Store.ToString("F")</div>
+                        <div class="card-top-unit">[kWh]</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="meter orange">
+                            <span id="power-store-percentage" style="width: 100%"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<script src="~/js/energy.js"></script>
