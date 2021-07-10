@@ -38,7 +38,6 @@
     <nav id="navbar2">
         <ul id="navbar">
             <li class="navbar-item">
-
                 <div id="homeTabButton" @GetButtonConfig("Home", "sidebar") aria-expanded="false">
                     <div class="navbar-icon"><i class="mdi mdi-view-dashboard"></i></div><span class="navbar-text">Strona Główna</span>
                 </div>
@@ -56,7 +55,6 @@
                 </div>
             </li>
             <li class="navbar-item">
-
                 <div id="meteoTabButton" @GetButtonConfig("Meteo", "sidebar") aria-expanded="false">
                     <div class="navbar-icon"><i class="mdi mdi-thermometer-lines"></i></div><span class="navbar-text">Stacja meteo</span>
                 </div>
@@ -66,6 +64,7 @@
 </div>
 <div id="page-wrapper">
     <header id="topbar">
+        <div class="toogle-menu-button"><i class="mdi mdi-menu"></i></div>
         <div id="adminTabButton" @GetButtonConfig("Admin", "topbar")>Panel administracyjny</div>
         <div id="settingsTabButton" @GetButtonConfig("Setting", "topbar")>Ustawienia</div>
         <a href="@Url.Action("Logout","User")"><div id="logoutTabButton" class="navbar-link topbar-button" style="background: #991900; padding-top: 5px; padding-bottom: 5px;" )>Wyloguj</div></a>

@@ -30,8 +30,8 @@ body {
 #main-wrapper {
     width: 100%;
     min-height: 100%;
-    min-width: 900px;
     display: flex;
+    min-width: 320px;
     flex-direction: row;
     justify-content: flex-start;
     align-items: stretch;
@@ -53,6 +53,7 @@ body {
     align-items: center;
     flex-direction: column;
     vertical-align: top;
+    padding-top: 64px;
 }
 
 .row {
@@ -60,7 +61,8 @@ body {
 }
 
 #topbar {
-    width: 100%;
+    width: calc(100% - 250px);
+    min-width: 240px;
     -webkit-box-shadow: 1px 0 7px rgba(0, 0, 0, 0.05);
     box-shadow: 1px 0 7px rgba(0, 0, 0, 0.05);
     background: #141619;
@@ -70,6 +72,7 @@ body {
     align-items: center;
     z-index: 10;
     padding: 15px;
+    position: absolute;
 }
 
 #sidebar {
@@ -95,7 +98,7 @@ body {
     padding: 0 10px 0 10px;
     text-decoration: none;
     color: white;
-    font-size: 30px;
+    font-size: 35px;
 }
 
     #logo:hover {
@@ -148,14 +151,14 @@ body {
 
 .navbar-icon {
     width: 35px;
-    font-size: 23px;
+    font-size: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .navbar-text {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 #breadcrumb > li + li:before {
@@ -381,18 +384,21 @@ body {
         text-decoration: none;
     }
 
-.toogle-menu {
-    display: flex;
+.toogle-menu-button {
     justify-content: center;
     align-items: center;
-    height: 100%;
-    margin-left: 15px;
+    height: 40px;
     width: 40px;
-    font-size: 24px;
+    font-size: 35px;
     color: #D0D0D1;
+    margin-right: auto;
+    display: none;
+    position: absolute;
+    top: 12px;
+    left: 20px;
 }
 
-    .toogle-menu:hover {
+    .toogle-menu-button:hover {
         cursor: pointer;
         color: white;
     }
@@ -400,7 +406,7 @@ body {
 .user-icon {
     height: 35px;
     width: 35px;
-    background: url("../../static/assets/images/user_custom.jpg") no-repeat center;
+    background: red;
     background-size: cover;
     border-radius: 50%;
     margin-left: auto;
@@ -411,29 +417,19 @@ body {
         cursor: pointer;
     }
 
-.user-menu {
-    width: 280px;
+.toogle-menu {
+    width: calc(100% - 75px);
     background: white;
-    position: relative;
-    top: 52px;
-    right: 240px;
+    position: absolute;
+    top: 64px;
+    right: 0px;
     z-index: 10000;
-    -webkit-box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.1);
-    cursor: default;
-    display: none;
-    font-size: 15px;
-    color: #212529;
+    background: #141619;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.user-menu-item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    cursor: pointer;
-    height: 35px;
-    padding: 0 0 0 15px;
-}
 
     .user-menu-item:hover {
         background: #f3f0f0;
@@ -506,7 +502,7 @@ body {
 }
 
 .card-peity {
-    width: 220px;
+    width: 220px !important;
     height: 150px;
     margin: 10px;
 }
@@ -544,7 +540,8 @@ body {
     flex-flow: row wrap;
     align-items: center;
     align-content: space-between;
-    justify-content: space-between;
+    justify-content: center;
+    padding-bottom: 10px;
 }
 
 .card-peity-fieldset {
@@ -720,6 +717,7 @@ div.loader {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20vh;
 }
 
 div.loader > div {
@@ -822,7 +820,70 @@ div.loader > div {
 
 .section {
     margin-top: 40px;
-    background: red;
-    width: 50%;
-    max-width: 800px;
+    width: 790px;
+}
+
+@media(max-width: 1150px) {
+    .section { width: 545px; }
+
+    div.loader > div {
+        width: 5vw;
+        height: 5vw;
+    }
+}
+
+@media(max-width: 900px) {
+    #sidebar { width: 75px; }
+
+    #page-wrapper { width: calc(100% - 75px); }
+
+    .navbar-text { display: none; }
+
+    div.loader > div {
+        width: 7vw;
+        height: 7vw;
+    }
+
+    #logo-text { display: none; }
+
+    #topbar { width: calc(100% - 75px); }
+}
+
+@media(max-width: 670px) {
+    .card-peity { margin: 10px 0; }
+
+    .section { width: 220px; }
+
+    .card-peity-fieldset { padding: 0 15px !important; }
+
+    .card-peity-row { width: 200px; }
+
+    .section { width: 230px !important; }
+
+    div.loader > div {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .topbar-button { display: none;
+        margin-top: 15px;
+    }
+
+    #logoutTabButton { display: inline; }
+
+    .toogle-menu-button { 
+        display: flex;
+    }
+    #topbar {
+        height: auto;
+        flex-direction: column-reverse;
+        justify-content: right;
+        align-items: flex-end;
+    }
+    .form-body {
+        width: 250px;
+    }
+    .form {
+        width: 250px;
+    }
 }

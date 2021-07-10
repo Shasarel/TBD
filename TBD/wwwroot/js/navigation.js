@@ -59,3 +59,27 @@ $(window).on({
         }
     }
 });
+
+var isScreenSmall = false;
+
+$(".toogle-menu-button").click(function () {
+    $(".topbar-button").not("#logoutTabButton").toggle(200);
+});
+$("#page-container, .topbar-button, #sidebar").click(function () {
+    if (isScreenSmall) $(".topbar-button").not("#logoutTabButton").hide(200);
+});
+
+function manageTopbarSizeChanges(x) {
+    if (x.matches) { 
+        $(".topbar-button").not("#logoutTabButton").hide();
+        isScreenSmall = true;
+    } else {
+        $(".topbar-button").not("#logoutTabButton").show();
+        isScreenSmall = false;
+    }
+}
+
+var x = window.matchMedia("(max-width: 670px)");
+manageTopbarSizeChanges(x);
+x.addListener(manageTopbarSizeChanges);
+
