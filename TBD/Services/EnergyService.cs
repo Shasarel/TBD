@@ -93,7 +93,7 @@ namespace TBD.Services
             return energySummary;
         }
 
-        private double GetPowerPercentage(int power)
+        private static double GetPowerPercentage(int power)
         {
             return Math.Round(Math.Min(Math.Abs(power) / 40.0, 100), 1);
         }

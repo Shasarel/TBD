@@ -132,7 +132,7 @@ namespace TBD.Core
             return Math.Round(pressure * f3, 1);
         }
 
-        private async Task<object> GetJsonResponse(string url)
+        private static async Task<object> GetJsonResponse(string url)
         {
             try
             {
@@ -144,7 +144,7 @@ namespace TBD.Core
             }
         }
 
-        private async Task<string> GetResponse(string url)
+        private static async Task<string> GetResponse(string url)
         {
             try
             {
@@ -154,8 +154,6 @@ namespace TBD.Core
                 using var response = (HttpWebResponse) await responseAsync;
                 await using var stream = response.GetResponseStream();
 
-                if (stream == null)
-                    return null;
                 using var reader = new StreamReader(stream);
                 var html = await reader.ReadToEndAsync();
 

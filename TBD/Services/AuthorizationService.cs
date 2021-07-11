@@ -12,6 +12,7 @@ using TBD.DbModels;
 using TBD.Enums;
 using TBD.Interfaces;
 using TBD.Models;
+using static System.Enum;
 
 
 namespace TBD.Services
@@ -68,17 +69,20 @@ namespace TBD.Services
                     ClockSkew = TimeSpan.Zero
                 }, out var validatedToken);
 
-                if (!(principal.Identity is ClaimsIdentity identity))
+                if (principal.Identity is not ClaimsIdentity identity)
                     return null;
                 if (!identity.IsAuthenticated)
                     return null;
 
-                Enum.TryParse(identity.FindFirst(ClaimTypes.Role).Value, out Role role);
+                if (!TryParse(identity.FindFirst(ClaimTypes.Role).Value, out Role role))
+                {
+                    role = Role.Guest;
+                }
 
                 return new User
                 {
-                    Login = identity.FindFirst(ClaimTypes.Name).Value,
-                    Name = identity.FindFirst(ClaimTypes.GivenName).Value,
+                    Login = identity.FindFirst(ClaimTypes.Name)?.Value,
+                    Name = identity.FindFirst(ClaimTypes.GivenName)?.Value,
                     Role = role
                 };
             }
@@ -112,14 +116,14 @@ namespace TBD.Services
             return token;
         }
 
-        private string GenerateApiKey()
+        private static string GenerateApiKey()
         {
             var rgx = new Regex("[^a-z0-9]");
             var apiKey = rgx.Replace(Convert.ToBase64String(GenerateRandomBytes(32)).ToLower(), "");
             return apiKey;
         }
 
-        private byte[] GenerateRandomBytes(int size)
+        private static byte[] GenerateRandomBytes(int size)
         {
             var bytes = new byte[size];
             using var rng = RandomNumberGenerator.Create();
@@ -127,14 +131,14 @@ namespace TBD.Services
             return bytes;
         }
 
-        private string HashPassword(string password)
+        private static string HashPassword(string password)
         {
             var salt = GenerateRandomBytes(16);
             var hash = CreateHash(password, salt);
             return ($"{Convert.ToBase64String(salt)}${hash}");
         }
 
-        private string CreateHash(string password, byte[] salt)
+        private static string CreateHash(string password, byte[] salt)
         {
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password,
@@ -144,7 +148,7 @@ namespace TBD.Services
                 32));
         }
 
-        private bool VerifyPassword(string password, string hashedPassword)
+        private static bool VerifyPassword(string password, string hashedPassword)
         {
             var split = hashedPassword.Split("$");
             var salt = Convert.FromBase64String(split[0]);
