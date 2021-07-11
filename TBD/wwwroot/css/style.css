@@ -15,7 +15,7 @@ a {
 
 body {
     margin: 0;
-    font-family: "Nunito Sans", sans-serif;
+    font-family: Helvetica, sans-serif;
     font-weight: 400;
     line-height: 1.5;
     color: #3e5569;
@@ -61,12 +61,12 @@ body {
 }
 
 #topbar {
-    width: calc(100% - 250px);
+    width: calc(100% - 280px);
     min-width: 240px;
     -webkit-box-shadow: 1px 0 7px rgba(0, 0, 0, 0.05);
     box-shadow: 1px 0 7px rgba(0, 0, 0, 0.05);
     background: #141619;
-    height: 64px;
+    height: 34px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -93,7 +93,7 @@ body {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     margin: 0 0 30px 0;
     padding: 0 10px 0 10px;
     text-decoration: none;
@@ -101,13 +101,9 @@ body {
     font-size: 35px;
 }
 
-    #logo:hover {
-        text-decoration: none;
-        color: white;
-    }
-
 #logo-icon {
     color: #ffe8a1;
+    margin-left: 8px;
 }
 
 #logo-text {
@@ -159,6 +155,7 @@ body {
 
 .navbar-text {
     font-size: 16px;
+    margin-left: 10px;
 }
 
 #breadcrumb > li + li:before {
@@ -505,6 +502,10 @@ body {
     width: 220px !important;
     height: 150px;
     margin: 10px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgray;
 }
 
 .card-peity-title {
@@ -546,7 +547,7 @@ body {
 
 .card-peity-fieldset {
     border: #3E5569 1px solid;
-    padding: 0 30px;
+    padding: 0;
     box-shadow: darkgray 1px 1px 5px;
     margin-bottom: 20px;
 }
@@ -554,8 +555,10 @@ body {
 .card-peity-legend {
     width: inherit;
     color: #3E5569;
+    font-size: 25px;
     background: #e0e0e0;
     z-index: 100;
+    margin-left: 50px;
 }
 
 .card-chart {
@@ -765,7 +768,6 @@ div.loader > div {
 }
 .topbar-button {
     background: #1F262D;
-    height: 100%;
     line-height: 34px;
     vertical-align: middle;
     text-align: center;
@@ -775,7 +777,7 @@ div.loader > div {
     border-color: grey;
     border-radius: 2px;
     border-width: 1px;
-    display: initial;
+    display: inline;
     align-items: initial;
     width: initial;
     margin-left: 15px;
@@ -820,11 +822,11 @@ div.loader > div {
 
 .section {
     margin-top: 40px;
-    width: 790px;
+    width: 750px;
 }
 
 @media(max-width: 1150px) {
-    .section { width: 545px; }
+    .section { width: 515px; }
 
     div.loader > div {
         width: 5vw;
@@ -846,7 +848,7 @@ div.loader > div {
 
     #logo-text { display: none; }
 
-    #topbar { width: calc(100% - 75px); }
+    #topbar { width: calc(100% - 105px); }
 }
 
 @media(max-width: 670px) {
@@ -886,4 +888,8 @@ div.loader > div {
     .form {
         width: 250px;
     }
+    .card-peity-legend {
+        margin-left: 15px;
+    }
+
 }

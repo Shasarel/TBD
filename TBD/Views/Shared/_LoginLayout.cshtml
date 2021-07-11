@@ -8,24 +8,14 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="">
     <title>@ViewData["Title"] - TBD</title>
-    <link rel="stylesheet" href="~/libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/style.css">
-    <link rel="stylesheet" href="~/icons/font-awesome/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="~/icons/material-design-iconic-font/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="~/icons/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="~/libs/toastr/toastr.min.css">
-    <link rel="stylesheet" href="~/libs/DataTables/datatables.min.css" />
-    <link rel="stylesheet" href="~/libs/datatimepicker/tempusdominus-bootstrap-4.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
 </head>
 <body>
 <div id="main-wrapper">
     @RenderBody()
 </div>
-<script src="~/libs/jquery/jquery-3.3.1.min.js"></script>
-<script src="~/libs/popper/umd/popper.min.js"></script>
-<script src="~/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="~/libs/toastr/toastr.min.js"></script>
+<script src="~/lib/jquery/jquery.min.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

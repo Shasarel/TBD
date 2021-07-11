@@ -22,14 +22,14 @@
                 classInactive = "navbar-link topbar-button";
                 break;
         }
-        return Html.Raw(((ViewContext.RouteData.Values["controller"].ToString() == controller) ? "class=\"" + classActive + " " + classInactive + "\"" : "class=\"" + classInactive + "\"") + " onclick=\"changePage('" + Url.Action("Index", controller) + "', this.id);\"");
+        return Html.Raw((ViewContext.RouteData.Values["controller"]?.ToString() == controller ? "class=\"" + classActive + " " + classInactive + "\"" : "class=\"" + classInactive + "\"") + " onclick=\"changePage('" + Url.Action("Index", controller) + "', this.id);\"");
     }
 }
 
 <div id="sidebar">
     <a id="logo" href="/">
         <b id="logo-icon">
-            <i class="mdi mdi-home"></i>
+            <i class="fas fa-home"></i>
         </b>
         <span id="logo-text">
             Asylum
@@ -39,7 +39,7 @@
         <ul id="navbar">
             <li class="navbar-item">
                 <div id="homeTabButton" @GetButtonConfig("Home", "sidebar") aria-expanded="false">
-                    <div class="navbar-icon"><i class="mdi mdi-view-dashboard"></i></div><span class="navbar-text">Strona Główna</span>
+                    <div class="navbar-icon"><i class="fas fa-th-large"></i></div><span class="navbar-text">Strona Główna</span>
                 </div>
             </li>
             <li class="navbar-item">
@@ -51,12 +51,12 @@
             <li class="navbar-item">
 
                 <div id="blindTabButton" @GetButtonConfig("Blind", "sidebar") aria-expanded="false">
-                    <div class="navbar-icon"><i class="mdi mdi-blinds"></i></div><span class="navbar-text">Rolety</span>
+                    <div class="navbar-icon"><i class="far fa-window-maximize"></i></div><span class="navbar-text">Rolety</span>
                 </div>
             </li>
             <li class="navbar-item">
                 <div id="meteoTabButton" @GetButtonConfig("Meteo", "sidebar") aria-expanded="false">
-                    <div class="navbar-icon"><i class="mdi mdi-thermometer-lines"></i></div><span class="navbar-text">Stacja meteo</span>
+                    <div class="navbar-icon"><i class="fas fa-temperature-low"></i></div><span class="navbar-text">Stacja meteo</span>
                 </div>
             </li>
         </ul>
@@ -64,10 +64,10 @@
 </div>
 <div id="page-wrapper">
     <header id="topbar">
-        <div class="toogle-menu-button"><i class="mdi mdi-menu"></i></div>
+        <div class="toogle-menu-button"><i class="fas fa-bars"></i></div>
         <div id="adminTabButton" @GetButtonConfig("Admin", "topbar")>Panel administracyjny</div>
         <div id="settingsTabButton" @GetButtonConfig("Setting", "topbar")>Ustawienia</div>
-        <a href="@Url.Action("Logout","User")"><div id="logoutTabButton" class="navbar-link topbar-button" style="background: #991900; padding-top: 5px; padding-bottom: 5px;" )>Wyloguj</div></a>
+        <a href="@Url.Action("Logout","User")"><div id="logoutTabButton" class="navbar-link topbar-button" style="background: #991900; padding-top: 9px; padding-bottom: 8px;" )>Wyloguj</div></a>
     </header>
     <div id="page-container">
         @RenderBody()

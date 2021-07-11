@@ -56,4 +56,7 @@ _ReSharper*/
 *.db
 
 #Configuration files
-appsettings.json
+**/appsettings.json
+
+#Client-side libraries
+**/wwwroot/lib/
