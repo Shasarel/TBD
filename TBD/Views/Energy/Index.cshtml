@@ -3,7 +3,7 @@
     ViewData["Title"] = "Energia";
 }
 <div id="title" hidden>@ViewData["Title"]</div>
-<div class="text-center section">
+<div class="section">
     <fieldset class="card-peity-fieldset" style="margin-top: -20px;">
         <legend class="card-peity-legend">Moc chwilowa</legend>
         <div class="card-peity-row">
@@ -95,7 +95,7 @@
     </fieldset>
 </div>
 
-<div class="text-center section">
+<div class="section">
     <fieldset class="card-peity-fieldset" style="margin-top: -20px;">
         <legend class="card-peity-legend">Energia</legend>
         <div class="card-peity-row">
@@ -103,12 +103,12 @@
                 <div class="card-peity-title">Dzienna produkcja</div>
                 <div class="card-peity-body">
                     <div class="card-top">
-                        <div id="power-production" class="card-top-number">@Model.EnergySummaryToday.Production.ToString("F")</div>
+                        <div class="card-top-number">@Model.EnergySummaryToday.Production.ToString("F")</div>
                         <div class="card-top-unit">[kWh]</div>
                     </div>
                     <div class="card-bottom">
                         <div class="meter green">
-                            <span id="power-production-percentage" style="width: 100%"></span>
+                            <span style="width: 100%"></span>
                         </div>
                     </div>
                 </div>
@@ -117,12 +117,12 @@
                 <div class="card-peity-title">Dzienne zużycie</div>
                 <div class="card-peity-body">
                     <div class="card-top">
-                        <div id="power-import" class="card-top-number">@Model.EnergySummaryToday.Consumption.ToString("F")</div>
+                        <div class="card-top-number">@Model.EnergySummaryToday.Consumption.ToString("F")</div>
                         <div class="card-top-unit">[kWh]</div>
                     </div>
                     <div class="card-bottom">
                         <div class="meter red">
-                            <span id="power-import-percentage" style="width: 100%"></span>
+                            <span style="width: 100%"></span>
                         </div>
                     </div>
                 </div>
@@ -131,12 +131,12 @@
                 <div class="card-peity-title">Dzienny bilans</div>
                 <div class="card-peity-body">
                     <div class="card-top">
-                        <div id="power-export" class="card-top-number">@Model.EnergySummaryToday.Store.ToString("F")</div>
+                        <div class="card-top-number">@Model.EnergySummaryToday.Store.ToString("F")</div>
                         <div class="card-top-unit">[kWh]</div>
                     </div>
                     <div class="card-bottom">
                         <div class="meter orange">
-                            <span id="power-export-percentage" style="width: 100%"></span>
+                            <span style="width: 100%"></span>
                         </div>
                     </div>
                 </div>
@@ -145,12 +145,12 @@
                 <div class="card-peity-title">Całkowita produkcja</div>
                 <div class="card-peity-body">
                     <div class="card-top">
-                        <div id="power-consumption" class="card-top-number">@Model.EnergySummaryAll.Production.ToString("F")</div>
+                        <div class="card-top-number">@Model.EnergySummaryAll.Production.ToString("F")</div>
                         <div class="card-top-unit">[kWh]</div>
                     </div>
                     <div class="card-bottom">
                         <div class="meter green">
-                            <span id="power-consumption-percentage" style="width: 100%"></span>
+                            <span style="width: 100%"></span>
                         </div>
                     </div>
                 </div>
@@ -159,12 +159,12 @@
                 <div class="card-peity-title">Całkowite zużycie</div>
                 <div class="card-peity-body">
                     <div class="card-top">
-                        <div id="power-use" class="card-top-number">@Model.EnergySummaryAll.Consumption.ToString("F")</div>
+                        <div class="card-top-number">@Model.EnergySummaryAll.Consumption.ToString("F")</div>
                         <div class="card-top-unit">[kWh]</div>
                     </div>
                     <div class="card-bottom">
                         <div class="meter red">
-                            <span id="power-use-percentage" style="width: 100%"></span>
+                            <span style="width: 100%"></span>
                         </div>
                     </div>
                 </div>
@@ -173,16 +173,33 @@
                 <div class="card-peity-title">Całkowity bilans</div>
                 <div class="card-peity-body">
                     <div class="card-top">
-                        <div id="power-store" class="card-top-number">@Model.EnergySummaryAll.Store.ToString("F")</div>
+                        <div class="card-top-number">@Model.EnergySummaryAll.Store.ToString("F")</div>
                         <div class="card-top-unit">[kWh]</div>
                     </div>
                     <div class="card-bottom">
                         <div class="meter orange">
-                            <span id="power-store-percentage" style="width: 100%"></span>
+                            <span style="width: 100%"></span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </fieldset>
+    <fieldset class="card-peity-fieldset">
+        <legend class="card-peity-legend">Historia</legend>
+            <div class="card-peity-row">
+            <a href="day" class="panel panel-small">
+                <div class="panel-title">Obecny dzień</div>
+            </a>
+            <a href="month" class="panel panel-small">
+                <div class="panel-title">Obecny miesiąc</div>
+            </a>
+            <a href="year" class="panel panel-small">
+                <div class="panel-title">Obecny rok</div>
+            </a>
+            <a href="all" class="panel panel-small">
+                <div class="panel-title">Od początku</div>
+            </a>
         </div>
     </fieldset>
 </div>
