@@ -147,10 +147,14 @@ body {
 
 .navbar-icon {
     width: 35px;
-    font-size: 35px;
+    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.select-date {
+    background: #b74a26 !important;
+    width: 300px !important;
 }
 
 .navbar-text {
@@ -386,7 +390,7 @@ body {
     align-items: center;
     height: 40px;
     width: 40px;
-    font-size: 35px;
+    font-size: 30px;
     color: #D0D0D1;
     margin-right: auto;
     display: none;
@@ -438,21 +442,27 @@ body {
         font-size: 20px;
     }
 
-.panel, .panel-static {
+.panel-button {
     background: #27A9E3;
-    width: 280px;
-    height: 100px;
+    width: 155px;
+    height: 50px;
     border-radius: 3px;
-    transition: all .25s ease;
     color: white;
     cursor: pointer;
     margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 16px;
+    background: #2255A4;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+}
+.panel-button:hover {
+    background:#193f7a
 }
 
-    .panel:hover {
-        transform: translateY(-4px) scale(1.01);
-        box-shadow: 0 14px 24px rgba(62, 57, 107, 0.1);
-    }
 
 .panel-icon {
     height: 50%;
@@ -465,11 +475,7 @@ body {
 }
 
 .panel-title {
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    font-size: 16px;
+
 }
 
 .card-title {
@@ -632,25 +638,12 @@ body {
     height: 50px;
 }
 
-.panel-small {
-    width: 155px;
-    height: 50px;
-    background: #2255A4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .panel-big {
     height: 60px;
     background: #2255A4;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.panel-small:hover {
-    color: white;
 }
 
 .panel-datapicker {
@@ -823,6 +816,12 @@ div.loader > div {
 .section {
     margin-top: 40px;
     width: 750px;
+}
+
+.picker__select--month, .picker__select--year {
+    font-family: inherit;
+    font-size: 100%;
+    padding-bottom: 5px !important;
 }
 
 @media(max-width: 1150px) {

@@ -187,20 +187,21 @@
     </fieldset>
     <fieldset class="card-peity-fieldset">
         <legend class="card-peity-legend">Historia</legend>
-            <div class="card-peity-row">
-            <a href="day" class="panel panel-small">
-                <div class="panel-title">Obecny dzień</div>
-            </a>
-            <a href="month" class="panel panel-small">
-                <div class="panel-title">Obecny miesiąc</div>
-            </a>
-            <a href="year" class="panel panel-small">
-                <div class="panel-title">Obecny rok</div>
-            </a>
-            <a href="all" class="panel panel-small">
-                <div class="panel-title">Od początku</div>
-            </a>
+        <div class="card-peity-row">
+            <div class="panel-button">Obecny dzień</div>
+            <div class="panel-button">Obecny miesiąc</div>
+            <div class="panel-button">Obecny rok</div>
+            <div class="panel-button">Od początku</div>
+            <div class="panel-button select-date" onclick="openPicker(pickerFrom);">Wybierz datę</div>
+            <input id="date-from" style="display: none" />
+            <input id="date-to" style="display: none" />
         </div>
     </fieldset>
 </div>
-<script src="~/js/energy.js"></script>
+<script>
+    $(document).ready(function() {
+        interval = setInterval(refreshPowerData, 1000);
+
+        createPickers();
+    });
+</script>

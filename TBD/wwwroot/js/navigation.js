@@ -1,6 +1,7 @@
 ﻿var lockButtons = false;
 var currentUrl = null;
 var documentReady = false;
+var interval;
 function changePage(url, buttonId=null, isBackButton = false) {
     if ((!lockButtons || isBackButton) && currentUrl !== url && documentReady) {
         lockButtons = true;

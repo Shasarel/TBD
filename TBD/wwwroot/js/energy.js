@@ -1,7 +1,5 @@
 ﻿
-var interval = setInterval(refreshPowerData, 1000);
-
-    function refreshPowerData() {
+function refreshPowerData() {
     $.ajax({
         url: "Energy/GetPowerNow",
         type: "GET",
@@ -25,4 +23,60 @@ var interval = setInterval(refreshPowerData, 1000);
             $("#power-store-percentage").css("width", data.powerStorePercentage + "%");
         }
     });
+}
+
+function openPicker(picker) {
+    picker.open();
+
+    event.stopPropagation();
+    event.preventDefault();
+}
+
+var pickerFrom;
+var pickerTo;
+
+function createPickers() {
+    var firstDate = new Date(2018, 6, 21);
+    var inputTo = $('#date-to').pickadate({
+        format: 'yyyy-mm-dd',
+        min: firstDate,
+        max: new Date(),
+        selectYears: true,
+        selectMonths: true,
+        clear: '',
+        onRender: function () {
+            $('#date-to_root > div > div > div > .picker__box')
+                .prepend('<p class="text-center" style="padding:.25em;text-align:center; font-weight:bold;">Data do: </p>');
+        },
+        onClose: function () {
+            if (pickerTo.get() !== "") {
+                console.log(pickerFrom.get());
+                console.log(pickerTo.get());
+            }
+        }
+    });
+    pickerTo = inputTo.pickadate("picker");
+
+    var inputFrom = $('#date-from').pickadate({
+        format: 'yyyy-mm-dd',
+        min: firstDate,
+        max: new Date(),
+        selectYears: true,
+        selectMonths: true,
+        clear: '',
+        onRender: function() {
+            $('#date-from_root > div > div > div > .picker__box')
+                .prepend('<p class="text-center" style="padding:.25em;text-align:center; font-weight:bold;">Data od: </p>');
+        },
+        onClose: function () {
+            if (pickerFrom.get() !== "") {
+                pickerTo.set("min", pickerFrom.get());
+                pickerTo.set("select", firstDate);
+                pickerTo.open();
+            }
+        }
+    });
+    pickerFrom = inputFrom.pickadate("picker");
+
+    pickerFrom.set("select", firstDate);
 }
